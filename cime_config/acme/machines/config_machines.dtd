@@ -1,0 +1,77 @@
+<!ELEMENT DIN_LOC_ROOT_CLMFORC (#PCDATA)>
+<!ELEMENT PROJECT_REQUIRED (#PCDATA)>
+<!ELEMENT default_run_misc_suffix (#PCDATA)>
+<!ELEMENT default_run_suffix (#PCDATA | default_run_exe | default_run_misc_suffix)*>
+<!ELEMENT DESC (#PCDATA)>
+<!ELEMENT CESMSCRATCHROOT (#PCDATA)>
+<!ELEMENT environment_variables (#PCDATA | env)*>
+<!ATTLIST environment_variables compiler CDATA #IMPLIED>
+<!ATTLIST environment_variables mpilib CDATA #IMPLIED>
+<!ATTLIST environment_variables debug CDATA #IMPLIED>
+<!ELEMENT module_system (#PCDATA | init_path | cmd_path | modules)*>
+<!ATTLIST module_system type CDATA #IMPLIED>
+<!ELEMENT BATCHSUBMIT (#PCDATA)>
+<!ELEMENT RUNDIR (#PCDATA)>
+<!ELEMENT walltimes (#PCDATA | walltime)*>
+<!ELEMENT SAVE_TIMING_DIR (#PCDATA)>
+<!ELEMENT PROJECT (#PCDATA)>
+<!ELEMENT BATCHQUERY (#PCDATA)>
+<!ELEMENT cmd_path (#PCDATA)>
+<!ATTLIST cmd_path lang CDATA #IMPLIED>
+<!ELEMENT PIO_BUFFER_SIZE_LIMIT (#PCDATA)>
+<!ELEMENT config_machines (#PCDATA | machine | default_run_suffix)*>
+<!ELEMENT modules (#PCDATA | command)*>
+<!ATTLIST modules debug CDATA #IMPLIED>
+<!ATTLIST modules compiler CDATA #IMPLIED>
+<!ATTLIST modules mpilib CDATA #IMPLIED>
+<!ELEMENT PES_PER_NODE (#PCDATA)>
+<!ELEMENT DOUT_S (#PCDATA)>
+<!ELEMENT MAX_TASKS_PER_NODE (#PCDATA)>
+<!ELEMENT GMAKE_J (#PCDATA)>
+<!ELEMENT batch_system (#PCDATA | queues | walltimes)*>
+<!ATTLIST batch_system type CDATA #IMPLIED>
+<!ATTLIST batch_system version CDATA #IMPLIED>
+<!ELEMENT GMAKE (#PCDATA)>
+<!ELEMENT DOUT_S_ROOT (#PCDATA)>
+<!ELEMENT BATCHREDIRECT (#PCDATA)>
+<!ELEMENT TESTS (#PCDATA)>
+<!ELEMENT PROXY (#PCDATA)>
+<!ELEMENT COMPILERS (#PCDATA)>
+<!ELEMENT walltime (#PCDATA)>
+<!ATTLIST walltime ccsm_estcost CDATA #IMPLIED>
+<!ATTLIST walltime default CDATA #IMPLIED>
+<!ELEMENT CCSM_BASELINE (#PCDATA)>
+<!ELEMENT NODENAME_REGEX (#PCDATA)>
+<!ELEMENT default_run_exe (#PCDATA)>
+<!ELEMENT init_path (#PCDATA)>
+<!ATTLIST init_path lang CDATA #IMPLIED>
+<!ELEMENT arg (#PCDATA)>
+<!ATTLIST arg default CDATA #IMPLIED>
+<!ATTLIST arg name CDATA #IMPLIED>
+<!ELEMENT PERL5LIB (#PCDATA)>
+<!ELEMENT CCSM_CPRNC (#PCDATA)>
+<!ELEMENT DOUT_L_MSROOT (#PCDATA)>
+<!ELEMENT OS (#PCDATA)>
+<!ELEMENT env (#PCDATA)>
+<!ATTLIST env name CDATA #IMPLIED>
+<!ELEMENT executable (#PCDATA)>
+<!ATTLIST executable args CDATA #IMPLIED>
+<!ELEMENT command (#PCDATA)>
+<!ATTLIST command name CDATA #IMPLIED>
+<!ELEMENT SUPPORTED_BY (#PCDATA)>
+<!ELEMENT machine (#PCDATA | DESC | NODENAME_REGEX | TESTS | OS | COMPILERS | MPILIBS | CESMSCRATCHROOT | RUNDIR | EXEROOT | DIN_LOC_ROOT | DIN_LOC_ROOT_CLMFORC | DOUT_S | DOUT_S_ROOT | DOUT_L_MSROOT | CCSM_BASELINE | CCSM_CPRNC | BATCHQUERY | BATCHSUBMIT | BATCHREDIRECT | SUPPORTED_BY | GMAKE_J | MAX_TASKS_PER_NODE | PES_PER_NODE | batch_system | mpirun | module_system | environment_variables | SAVE_TIMING_DIR | PROJECT | PROJECT_REQUIRED | PIO_CONFIG_OPTS | PROXY | GMAKE | PIO_BUFFER_SIZE_LIMIT | PERL5LIB)*>
+<!ATTLIST machine MACH CDATA #IMPLIED>
+<!ELEMENT queues (#PCDATA | queue)*>
+<!ELEMENT arguments (#PCDATA | arg)*>
+<!ELEMENT queue (#PCDATA)>
+<!ATTLIST queue walltimemin CDATA #IMPLIED>
+<!ATTLIST queue walltimemax CDATA #IMPLIED>
+<!ATTLIST queue jobmin CDATA #IMPLIED>
+<!ATTLIST queue jobmax CDATA #IMPLIED>
+<!ATTLIST queue default CDATA #IMPLIED>
+<!ELEMENT mpirun (#PCDATA | executable | arguments)*>
+<!ATTLIST mpirun mpilib CDATA #IMPLIED>
+<!ELEMENT PIO_CONFIG_OPTS (#PCDATA)>
+<!ELEMENT MPILIBS (#PCDATA)>
+<!ELEMENT EXEROOT (#PCDATA)>
+<!ELEMENT DIN_LOC_ROOT (#PCDATA)>
