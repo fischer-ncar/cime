@@ -26,9 +26,9 @@
         <GMAKE_J>1</GMAKE_J>
         <MAX_TASKS_PER_NODE>USERDEFINED_required_build</MAX_TASKS_PER_NODE>
         
-        <batch_system type="slurm" version="x.y">
+        <batch_system type="Batchsystem name" version="Version Numer x.y">
             <queues>
-                <queue walltimemax="36:00:00" jobmin="1" jobmax="130181" >regular</queue>
+                <queue walltimemax="hh:mm:ss" jobmin="1" jobmax="130181" >regular</queue>
                 <queue walltimemax="00:30:00" jobmin="1" jobmax="12288" default="true">debug</queue>
             </queues>
             <walltimes>
@@ -44,59 +44,62 @@
         </mpirun>
         
         <!-- Module system of machine, dependencies for compiler and mpilib combinations -->
-        <module_system type="module">
-            <init_path lang="perl">/opt/modules/default/init/perl.pm</init_path>
-            <init_path lang="python">/opt/modules/default/init/python.py</init_path>
-            <init_path lang="sh">/opt/modules/default/init/sh</init_path>
+        <module_system type="Name of modue system, prefix for module system commands, e.g. 'module'">
             
-            <cmd_path lang="perl">/opt/modules/default/bin/modulecmd perl</cmd_path>
-            <cmd_path lang="python">/opt/modules/default/bin/modulecmd python</cmd_path>
+            <!-- list of init_path elements, one per supported language e.g. sh, perl, python-->
+            <init_path lang="perl">PATH</init_path>
+           
+            <!-- list of cmd_path elements, one for every supported language, e.g. sh, perl, python -->
+            <cmd_path lang="perl">e.g. /opt/modules/default/bin/modulecmd perl</cmd_path>
+            <cmd_path lang="python">e.g. /opt/modules/default/bin/modulecmd python</cmd_path>
             <cmd_path lang="sh">module</cmd_path>
             
-            <!-- Check every module if condition applies  -->
+
+            <!-- List of modules elements, executing commands 
+                if compiler and mpilib condition applies -->
             
             <!-- Always execute -->
-            <modules>
+            <modules> 
                 <command name="rm">intel</command>
                 <command name="rm">pmi</command>
             </modules>
             
             <!-- If compiler is  $C -->
-            <modules compiler="intel">
-                <command name="load">PrgEnv-intel</command>
-                <command name="switch">intel intel/16.0.0.109</command>
-                <command name="rm">cray-libsci</command>
-                <command name="use">/global/project/projectdirs/ccsm1/modulefiles/edison</command>
+            <modules compiler="e.g. intel">  
+                <!-- List of command elements -->
+                <command name="e.g. load, add, switch">Option, e.g. module name</command>
             </modules>
             
             <!-- If compiler is $C and mpilib $M -->
-            <modules compiler="intel" mpilib="mpi-serial" >
-                <command name="load">esmf/6.3.0rp1-defio-intel15.0-mpiuni-O</command>
+            <modules compiler="e.g. intel" mpilib="e.g. mpi-serial" >
+                <command name="Module command">Option</command>
             </modules>
             
             <!-- If compiler is $C and not mpilib $M -->
             <modules compiler="intel" mpilib="!mpi-serial" >
-                <command name="load">esmf/6.3.0rp1-defio-intel15.0-mpi-O</command>
+                <command name=""></command>
             </modules>
            
            <!-- If mpilib is $M -->
             <modules mpilib="mpi-serial">
-                <command name="load">cray-hdf5/1.8.16</command>
-                <command name="load">cray-netcdf/4.3.3.1</command>
+                <command name=""></command>
+                <command name=""></command>
             </modules>
             
         </module_system>
         
-        <!-- Set environment variables depending on compiler and mpilib -->
+        
+        <!-- List of environment variable elements, 
+            set environment variables depending on compiler and mpilib -->
         
         <!-- Always set -->
         <environment_variables>
-            <env name="OMP_STACKSIZE">64M</env>
+            <env name="VARIABlE_NAME">VALUE</env>
         </environment_variables>
         
         <!-- Set if compiler and mpilib  -->
         <environment_variables compiler="" mpilib="">
-            <env name=""></env>
+            <env name="VARIABLE_NAME">VALUE</env>
         </environment_variables>
         
     </machine>
