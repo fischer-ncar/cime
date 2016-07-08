@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE config_machines SYSTEM "file:/Users/Andi/Development/ESMCI/cime/cime_config/acme/machines/config_machines.dtd">
+
 
 <config_machines>
   <machine MACH="userdefined">
