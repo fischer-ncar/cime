@@ -1147,6 +1147,9 @@
 				     <command name="rm">cray-netcdf</command>
 				     <command name="rm">cray-netcdf-hdf5parallel</command>
 				     <command name="rm">cray-parallel-netcdf</command>
+					 <!-- Set last-->
+				     <command name="load">subversion</command>
+				     <command name="load">cmake/2.8.11.2</command>
 	             </modules>
 				 
 				 <modules compiler="pgi_acc">
@@ -1159,19 +1162,83 @@
 				       <command name="add">cudatoolkit</command>				
 				 </modules>
 				 
+				<modules compiler="pgi">
+					<command name="load">PrgEnv-pgi</command>
+					<command name="switch">pgi pgi/15.3.0</command>
+					<command name="switch">cray-mpich cray-mpich/7.2.5</command>
+					<command name="switch">cray-libsci cray-libsci/13.0.4</command>
+					<command name="load">esmf/5.2.0rp2</command>
+					<command name="switch">atp atp/1.7.5</command>			   
+				</modules>
+				
+				<modules compiler="intel">	  
+			    	<command name="load">PrgEnv-intel</command> 
+			    	<command name="switch">intel intel/15.0.2.164</command>
+			    	<command name="switch">cray-libsci cray-libsci/13.0.4</command>
+			    	<command name="switch">cray-mpich cray-mpich/7.2.5</command>
+			    	<command name="switch">atp atp/1.7.5</command>
+				</modules>
+				 
+				 <modules compiler="cray">
+			         <command name="load">PrgEnv-cray</command>	
+			         <command name="load">cce</command>	
+			         <command name="swap">cray-mpich cray-mpich/7.2.5</command>	
+				</modules>	 
+				
+				<!-- mpi lib settings -->
+				<modules mpilib="mpi-serial">
+					<command name="load">cray-netcdf/4.3.3.1</command>	
+				</modules>	
+				
+				<modules mpilib="!mpi-serial">
+					<command name="load">cray-netcdf-hdf5parallel/4.3.3.1</command>
+					<command name="load">cray-parallel-netcdf/1.5.0</command>	
+				</modules>	
+					 
 				 <!-- Default -->
+				 
+				 <!--
+					 set CESM_REPO = `./xmlquery CCSM_REPOTAG -value`
+					 if($status == 0) then
+				-->
 		         <environment_variables>
 		             <env name="COMPILER"></env>
 					 <env name="MPILIB"></env>
+					 <env name="MPICH_CPUMASK_DISPLAY">1</env>
+					 <env name="MPSTKZ">128M</env>
+					 <env name="OMP_STACKSIZE">128M</env>
+		         </environment_variables>
+				 
+		         <environment_variables>
+		             <env name="MPICH_ENV_DISPLAY">1</env>
+					 <env name="MPICH_VERSION_DISPLA">1</env>
 					 <env name="MODULEPATH">${MODULEPATH}:/ccs/home/norton/.modules</env>
 		         </environment_variables>
 				 
+				 <!-- 
+					 limit coredumpsize unlimited
+					 limit stacksize unlimited
+				 -->
+				 
+				 
 		         <!-- Set if compiler and mpilib  -->
 		         <environment_variables compiler="pgi_acc">
-					 <!-- NOTE(wjs, 2015-03-12) The following line is needed for bit-for-bit reproducibility -->
+					 <!-- NOTE(wjs, 2015-03-12) The following line is 
+					 needed for bit-for-bit reproducibility -->
 		             <env name="CRAY_CPU_TARGET">istanbul</env>
 					 <env name="CRAY_CUDA_MPS">1</env> 
 		        </environment_variables>
+		
+	         <environment_variables compiler="pgi">
+				 <!-- NOTE(wjs, 2015-03-12) The following line is 
+				 needed for bit-for-bit reproducibility -->
+				 <env name="CRAY_CPU_TARGET">istanbul</env> 
+	        </environment_variables>
+			
+         <environment_variables compiler="intel">
+			 <env name="XTPE_LINK_TYPE">dynamic</env> 
+        </environment_variables>
+			
 		 </module_system>
 		 
 </machine>
