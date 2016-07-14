@@ -326,7 +326,7 @@
      </walltimes>
    </batch_system>
 
-   <batch_system MACH="titan" version="x.y">
+   <batch_system MACH="titan" type="pbs" version="x.y">
      <jobid_pattern>(\d+)</jobid_pattern>
      <directives>
        <directive>-A {{ project }}</directive>
