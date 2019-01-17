@@ -559,11 +559,6 @@ ifeq ($(findstring -cosp,$(CAM_CONFIG_OPTS)),-cosp)
   endif
 endif
 
-  ifeq ($(MODEL),driver)
-    INCLDIR+=-I$(COSP_LIBDIR)
-  endif
-endif
-
 ifeq ($(MODEL),cam)
   # These RRTMG files take an extraordinarily long time to compile with optimization.
   # Until mods are made to read the data from files, just remove optimization from
