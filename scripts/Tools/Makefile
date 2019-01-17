@@ -557,7 +557,7 @@ ifeq ($(findstring -cosp,$(CAM_CONFIG_OPTS)),-cosp)
   ifeq ($(MODEL),driver)
     INCLDIR+=-I$(COSP_LIBDIR)
   endif
- endif
+endif
 
   ifeq ($(MODEL),driver)
     INCLDIR+=-I$(COSP_LIBDIR)
