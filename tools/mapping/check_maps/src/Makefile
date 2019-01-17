@@ -8,18 +8,25 @@
 
 ################################################################################
 ### Finding and including esmf.mk                                         ######
-### NOTE: On Yellowstone, ESMF is only available with the intel compilers ######
+### NOTE: On Cheyenne, ESMF is only available with the intel compilers    ######
 ###       And require running the following:                              ######
-###           $ module load esmf                                          ######
-###           $ module load esmf-6.3.0r-ncdfio-uni-O                      ######
-###       The executable should run on the yellowstone login node         ######
+###           $ module load esmf_libs/7.0.0                               ######
+###           $ module load esmf-7.0.0-ncdfio-uni-O                       ######
+###       The executable should run on the cheyenne login node            ######
 ################################################################################
 
-ifneq ($(origin ESMFMKFILE), environment)
-$(error Environment variable ESMFMKFILE was not set.)
+# Don't require ESMF to be loaded to run "make clean":
+USE_ESMF=TRUE
+ifeq ($(MAKECMDGOALS),clean)
+  USE_ESMF=FALSE
 endif
 
-include $(ESMFMKFILE)
+ifeq ($(USE_ESMF),TRUE)
+  ifneq ($(origin ESMFMKFILE), environment)
+    $(error Environment variable ESMFMKFILE was not set.)
+  endif
+  include $(ESMFMKFILE)
+endif
 TARGET = ESMF_RegridWeightGenCheck
 
 # To compile with verbose output, run

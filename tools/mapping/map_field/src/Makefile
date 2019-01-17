@@ -29,14 +29,26 @@ null :=
 CURDIR = .
 EXENAME = ../map_field
 RM = rm
-MACFILE = Macros.make
+MACROS = Macros.make
 
 default: $(EXENAME)
 
-$(MACFILE):
-	@echo "use the configure script located in the Machines directory to create the Makefile $(MACFILE) file"
+$(MACROS):
+	@echo "use the configure script located in the Machines directory to create the Makefile $(MACROS) file"
 
--include $(MACFILE)
+# Do not include Macros for clean or distclean targets
+USE_MACROS=TRUE
+ifeq ($(MAKECMDGOALS),clean)
+  USE_MACROS=FALSE
+endif
+ifeq ($(MAKECMDGOALS),distcleanclean)
+  USE_MACROS=FALSE
+endif
+
+ifeq ($(USE_MACROS),TRUE)
+  -include $(MACROS)
+endif
+
 # Check for the netcdf library and include directories
 ifdef NETCDF_PATH
   LIB_NETCDF:=$(NETCDF_PATH)/lib
@@ -97,7 +109,7 @@ else
   FPPDEFS := $(CPPDEFS)
 endif
 #Primary Target: build the tool
-all: $(EXENAME) $(MACFILE)
+all: $(EXENAME) $(MACROS)
 
 OBJS := map_field.o
 
@@ -131,9 +143,9 @@ $(EXENAME): $(OBJS)
 	$(LINKER) -o $@ $(OBJS) $(SLIBS) $(LDFLAGS)
 
 clean:
-	$(RM) -f $(OBJS) $(EXENAME) *.mod
+	$(RM) -f $(OBJS) $(EXENAME) *.mod *.optrpt
 
-veryclean:
-	$(RM) -f $(OBJS) $(EXENAME) *.mod $(MACFILE) .env_mach* env_mach*
+distclean: clean
+	../../../configure --clean
 
 map_field.o : map_field.F90
